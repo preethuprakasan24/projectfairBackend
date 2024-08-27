@@ -17,7 +17,13 @@ require('./connection')
 //create server
 const pfServer = express()
 //to connect with frontend
-pfServer.use(cors())
+
+pfServer.use(cors({
+    origin: 'https://project-fair-frontend-rust.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  }));
+// pfServer.use(cors())
 
 //parse json format -json()
 pfServer.use(express.json())
