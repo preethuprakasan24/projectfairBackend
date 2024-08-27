@@ -52,12 +52,12 @@ exports.loginController = async (req, res) => {
 exports.updateProfileController = async (req, res) => {
     const userId = req.payload
     const { username, email, password, github, linkedin, profile } = req.body
-    const projectImg = req.file ? req.file.filename : profile
+    const profileImg = req.file ? req.file.filename : profile
 
     try {
-        const existingUser = await users.findByIdAndUpdate({ _id: userId }, { username, email, password, github, linkedin, profile: projectImg }, { new: true })
+        const existingUser = await users.findByIdAndUpdate({ _id: userId }, { username, email, password, github, linkedin, profile: profileImg }, { new: true })
         await existingUser.save()
-        res.status(200).json({ existingUser })
+        res.status(200).json(existingUser)
     } catch (error) {
         res.status(401).json(error)
     }
